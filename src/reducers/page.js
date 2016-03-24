@@ -1,5 +1,5 @@
 const initialState = {
-  year: 2013,
+  year: 2012,
   photos: []
 }
 

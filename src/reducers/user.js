@@ -1,7 +1,7 @@
 const initialState = {
-  name: 'nadfme',
-  surname: 'suadssd',
-  age: 120
+  name: 'name',
+  surname: 'someSurname',
+  age: 42
 }
 
 export default function user(state = initialState) {
