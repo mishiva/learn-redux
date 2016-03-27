@@ -6,7 +6,7 @@ export default class User extends Component {
     const {name, surname, age} = this.props.user
     console.log()
     return (
-      <div>
+      <div className='ib user'>
         <p>Привет {name} {surname}</p>
         <p>Age is {age}</p>
       </div>
