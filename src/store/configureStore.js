@@ -3,12 +3,18 @@ import rootReducer from '../reducers';
 // import { ping } from '../enhancers/ping';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from '../sagas';
 
 export default function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    applyMiddleware(thunk, createLogger())
+    applyMiddleware(
+      thunk,
+      createLogger(),
+      createSagaMiddleware(rootSaga)
+    )
   )
 
   if (module.hot) {

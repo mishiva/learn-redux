@@ -21,7 +21,6 @@ export default function todo(state = initialState, action) {
 
     case REMOVE_TODO: {
     const indx = state.todos.findIndex(x => x.id === action.payload)
-    console.log(indx);
       return Object.assign({}, state, {
           todos: [
             ...state.todos.slice(0, indx),
