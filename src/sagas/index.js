@@ -16,7 +16,10 @@ function getFriendsRequestUrl(rows) {
 function fetchFriendsApi(rows) {
   return fetch(getFriendsRequestUrl(rows))
     .then(response => response.json() )
-    .then(json => json.data.children.map(child => child.data) )
+    .then(json => {
+      debugger
+      return json.data.children.map(child => child.data) 
+    })
 }
 
 function* fetchFriends(action) {

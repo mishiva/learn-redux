@@ -17,7 +17,8 @@ export default function user(state = initialState, action) {
 
     case FRIENDS_FETCH_SUCCEEDED:
       return Object.assign({}, state, {
-        friends: action.payload
+        friends: action.payload,
+        message: ''
       })
 
     case FRIENDS_FETCH_FAILED:

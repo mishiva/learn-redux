@@ -6,26 +6,32 @@ import Page from '../components/page';
 import Todo from '../components/todo';
 import * as pageActions from '../actions/PageActions';
 import * as todoActions from '../actions/TodoActions';
+import * as userActions from '../actions/UserActions';
 
 class App extends Component {
   render() {
     const { user, page, todo } = this.props
     const { getPhotos } = this.props.pageActions
     const { addTodo, removeTodo } = this.props.todoActions
+    const { getFriends } = this.props.userActions
     return (
       <div>
-        <User user={user} />
+        <User
+          rows={10}
+          user={user}
+          getFriends={getFriends}
+        />
         <Page
           photos={page.photos}
           year={page.year}
           getPhotos={getPhotos}
           fetching={page.fetching}
-           />
+        />
         <Todo
           addTodo={addTodo}
           removeTodo={removeTodo}
           todos={todo.todos}
-          />
+        />
       </div>
     );
   }
@@ -42,7 +48,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     pageActions: bindActionCreators(pageActions, dispatch),
-    todoActions: bindActionCreators(todoActions, dispatch)
+    todoActions: bindActionCreators(todoActions, dispatch),
+    userActions: bindActionCreators(userActions, dispatch)
   }
 }
 
