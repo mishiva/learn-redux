@@ -15,17 +15,16 @@ function getFriendsRequestUrl(rows) {
 
 function fetchFriendsApi(rows) {
   return fetch(getFriendsRequestUrl(rows))
-    .then(response => response.json() )
-    .then(json => {
-      debugger
-      return json.data.children.map(child => child.data) 
+    .then(response => {
+      return response.json()
     })
+    .then(json => json)
 }
 
 function* fetchFriends(action) {
   try {
-    const friends = yield call(fetchFriendsApi, action.payload.rows);
-    yield put(userActions.fetchFriendsFail(friends));
+    const friends = yield call(fetchFriendsApi, action.payload);
+    yield put(userActions.fetchFriendsSuccess(friends));
   } catch (e) {
     yield put(userActions.fetchFriendsFail(e.message));
   }
