@@ -23,6 +23,7 @@ function fetchFriendsApi(rows) {
 
 function* fetchFriends(action) {
   try {
+    yield put(userActions.fetchingFriends(true));
     const friends = yield call(fetchFriendsApi, action.payload);
     yield put(userActions.fetchFriendsSuccess(friends));
   } catch (e) {

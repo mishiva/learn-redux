@@ -1,7 +1,8 @@
 import {
   GET_FRIENDS_REQUEST,
   FRIENDS_FETCH_SUCCEEDED,
-  FRIENDS_FETCH_FAILED
+  FRIENDS_FETCH_FAILED,
+  FETCHING_FRIENDS
 } from '../constants/User'
 
 export const getFriends = (rows) => {
@@ -22,5 +23,12 @@ export const fetchFriendsFail = (message) => {
   return {
     type: FRIENDS_FETCH_FAILED,
     payload: message
+  }
+}
+
+export const fetchingFriends = (fetching) => {
+  return {
+    type: FETCHING_FRIENDS,
+    payload: fetching
   }
 }

@@ -1,10 +1,30 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 
-export default class User extends Component {
+export default React.createClass({
+  propTypes: {
+    user: React.PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      surname: PropTypes.string.isRequired,
+      age: PropTypes.number.isRequired
+    })
+  },
+
+  // getInitialState() {
+  //   return {
+  //     fetching: this.props.user.fetching
+  //   }
+  // },
+
+  onFriendsClick() {
+    const { getFriends, rows } = this.props
+    // this.setState({fetching: true})
+    // console.log(this.state.fetching)
+    getFriends(rows)
+  },
+
   render() {
-    const { user, getFriends, rows } = this.props
-    const { name, surname, age, friends, message } = user
+    const { name, surname, age, friends, message, fetching } = this.props.user
     const haveFriends = friends.length > 0
     const firendsList = friends.map((friend, i) =>{
       return <li key={i}>{friend.fname} {friend.lname}</li>
@@ -13,8 +33,12 @@ export default class User extends Component {
       <div className='ib user'>
         <p>Привет {name} {surname}</p>
         <p>Age is {age}</p>
-        <button onClick={() => getFriends(rows)}>Show my friends</button>
-        {
+        <button onClick={this.onFriendsClick}>Show my friends</button>
+        <div className='wrap'>
+          {
+          fetching ?
+          <p>LOADING...</p>
+          :
           haveFriends ?
           <div>
             <p>Your friends are:</p>
@@ -22,18 +46,19 @@ export default class User extends Component {
           </div>
           :
           <p>Your don't have friends!</p>
-        }
-        <p className='error message' style={{color: '#E36049'}}>{message}</p>
+          }
+          <p className='error message' style={{color: '#E36049'}}>{message}</p>
+        </div>
       </div>
     );
   }
 
-}
+})
 
-User.propTypes = {
-  user: React.PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    surname: PropTypes.string.isRequired,
-    age: PropTypes.number.isRequired
-  })
-}
+// User.propTypes = {
+//   user: React.PropTypes.shape({
+//     name: PropTypes.string.isRequired,
+//     surname: PropTypes.string.isRequired,
+//     age: PropTypes.number.isRequired
+//   })
+// }
