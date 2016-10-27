@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import { watchFriendsRequest } from '../sagas';
 
-export default function configureStore(initialState) {
+function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
@@ -26,3 +26,7 @@ export default function configureStore(initialState) {
 
   return store;
 }
+
+const store = configureStore();
+
+export default store;

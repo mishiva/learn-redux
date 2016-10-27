@@ -2,7 +2,7 @@ import {
   SET_YEAR,
   GET_PHOTOS_REQUEST,
   GET_PHOTOS_SUCCESS
-} from '../constants/Page'
+} from '../constants/Years'
 
 export function setYear(year) {
   return {

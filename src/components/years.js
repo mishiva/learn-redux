@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class Page extends Component {
+export default class Years extends Component {
   onYearBtnClick(e) {
     if(this.props.fetching) return
     this.props.getPhotos(+e.target.textContent);
@@ -23,7 +23,7 @@ export default class Page extends Component {
   }
 }
 
-Page.propTypes = {
+Years.propTypes = {
   year: PropTypes.number.isRequired,
   photos: PropTypes.array.isRequired,
   getPhotos: PropTypes.func.isRequired

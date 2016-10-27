@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import page from './page';
+import years from './years';
 import user from './user';
 import todo from './todo';
 
 export const rootReducer = combineReducers({
   todo,
-  page,
+  years,
   user
 });
 
