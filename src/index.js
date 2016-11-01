@@ -9,9 +9,7 @@ import { routes } from './routes'
 
 render(
   <Provider store={store}>
-    <div className='app'> 
-      <Router history={hashHistory} routes={routes} />
-    </div> 
+    <Router history={hashHistory} routes={routes} />
   </Provider>,
   document.getElementById('root')
 )
