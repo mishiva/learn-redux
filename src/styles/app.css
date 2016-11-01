@@ -121,10 +121,9 @@ html, body {
 .container {
   padding: 0 2%;
   font: 14px Arial, sans-serif;
-  height: 100%;
   width: 100%;
   position: relative;
-  min-height: 300px;
+  min-height: 100%;
 }
 
 #root {
@@ -174,7 +173,8 @@ html, body {
 }
 
 .content {
-  margin: 30px auto 10px auto;
+  margin: 30px auto 0 auto;
+  padding-bottom: 90px;
 }
 
 /* footer */
@@ -183,6 +183,7 @@ html, body {
   background-color: darkcyan;
   position: absolute;
   width: 96%;
+  height: 90px;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -199,4 +200,43 @@ html, body {
 }
 .sponsors__item {
   
+}
+
+
+
+/* modal */
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: lightblue;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border: 2px solid rebeccapurple;
+  max-width: 500px;
+  width: 80%;
+  padding: 10px 0;
+}
+
+.modal-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.modal-body {
+  padding: 10px;
+  text-align: center;
 }
