@@ -11,6 +11,12 @@ import AuthForm from './AuthForm/AuthForm';
 
 class Auth extends Component {
 
+  componentWillMount() {
+    console.log('&&&&&& WILL MOUNT &&&&&&')
+    const email = window.localStorage.getItem('token')
+    email && this.props.authActions.getUserRequest(email);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.isAuth) {
       this.refs.authPortal.closePortal();
@@ -37,7 +43,10 @@ class Auth extends Component {
             </button>
           </div>
         ) : (
-          <span>{user.first_name} {user.last_name}</span>
+          <div>
+            <span>{user.first_name} {user.last_name}</span>
+            <button onClick={::this.handleLogout}>Logout</button>
+          </div>
         )}
       </div>
     );
@@ -52,6 +61,10 @@ class Auth extends Component {
     authRequest(data)
   }
 
+  handleLogout() {
+    const { logoutRequest } = this.props.authActions
+    logoutRequest()
+  }
 }
 
 

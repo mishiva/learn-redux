@@ -15,7 +15,7 @@ export const routes = (
       <Route path='/user' component={User} />
       <Route path='/todo' component={Todo} />
       <Route path='/years' component={Years} />
+      <Route path='*' component={PageNotFound} />
     </Route>
-    <Route path='*' component={PageNotFound} />
   </div>
 )

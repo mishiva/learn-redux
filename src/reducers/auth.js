@@ -1,7 +1,8 @@
 import {
   AUTH_USER_PROCEEDING,
   AUTH_USER_SUCCESS,
-  AUTH_USER_FAIL
+  AUTH_USER_FAIL,
+  LOGOUT_USER_SUCCESS
 } from '../constants/Auth'
 
 const initialState = {
@@ -34,6 +35,9 @@ export default function auth(state = initialState, action) {
         authProceeding: true,
         isAuth: false
       })
+
+    case LOGOUT_USER_SUCCESS:
+      return initialState
 
     default:
       return state

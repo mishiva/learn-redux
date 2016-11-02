@@ -2,24 +2,9 @@ import React, { Component, PropTypes } from 'react';
 
 
 export default class User extends Component {
-  // propTypes: {
-  //   user: React.PropTypes.shape({
-  //     name: PropTypes.string.isRequired,
-  //     surname: PropTypes.string.isRequired,
-  //     age: PropTypes.number.isRequired
-  //   })
-  // },
-
-  // getInitialState() {
-  //   return {
-  //     fetching: this.props.user.fetching
-  //   }
-  // },
 
   onFriendsClick() {
     const { getFriends, rows } = this.props
-    // this.setState({fetching: true})
-    // console.log(this.state.fetching)
     getFriends(rows)
   }
 
