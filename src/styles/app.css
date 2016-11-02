@@ -93,6 +93,10 @@ h3 {
 
 
 /* common */
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
 .clearfix:after {
   content: '';
   display: table;
@@ -117,10 +121,10 @@ h3 {
 
 html, body {
   height: 100%;
+  font: 14px Arial, sans-serif;
 }
 .container {
   padding: 0 2%;
-  font: 14px Arial, sans-serif;
   width: 100%;
   position: relative;
   min-height: 100%;
@@ -150,6 +154,15 @@ html, body {
 }
 .footer-nav .nav {
   display: initial;
+}
+
+/* form */
+.form-error {
+  color: red;
+  font-size: 12px;
+}
+.form-input {
+  margin-bottom: 10px;
 }
 
 

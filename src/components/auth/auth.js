@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Portal from 'react-portal';
 
 import BaseModal from '../BaseModal';
-import AuthModal from '../modals/AuthModal/AuthModal';
+import AuthForm from './AuthForm/AuthForm';
 
 
 export default class Auth extends Component {
@@ -14,18 +14,22 @@ export default class Auth extends Component {
         {/* Portals */}
         <Portal closeOnEsc openByClickOn={authBtn}>
           <BaseModal modalClassName='auth-modal'>
-            <AuthModal/>
+            <AuthForm onSubmit={::this.handleSubmit}/>
           </BaseModal>
         </Portal>
         <button
           className='registration-btn'
-          onClick={::this.onRegistrationClick}>Registration</button>
+          onClick={::this.handleRegistration}>Registration</button>
       </div>
     );
   }
 
-  onRegistrationClick() {
+  handleRegistration() {
     alert(' Show Registration Modal ');
+  }
+
+  handleSubmit() {
+
   }
 
 }

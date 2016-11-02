@@ -17,7 +17,6 @@ export default class BaseModal extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <div className='modal-overlay' />
