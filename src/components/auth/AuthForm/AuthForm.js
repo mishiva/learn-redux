@@ -8,7 +8,7 @@ import renderField from '../../../helpers/renderField';
 
 class AuthForm extends Component {
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, authProceeding } = this.props;
     return (
       <div>
         <h1>Authorization</h1>
@@ -16,7 +16,7 @@ class AuthForm extends Component {
           <Field name='email' type='email' component={renderField} label='Email'/>
           <Field name='password' type='password' component={renderField} label='Password'/>
           <div>
-            <button type='submit' disabled={submitting}>Submit</button>
+            <button type='submit' disabled={authProceeding}>Submit</button>
           </div>
         </form>
       </div>
