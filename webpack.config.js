@@ -32,7 +32,7 @@ module.exports = {
     ],
     loaders: [
       {
-        loaders: ['react-hot', 'babel'],
+        loaders: ['react-hot-loader/webpack', 'babel'],
         include: [
           path.resolve(__dirname, 'src'),
         ],
