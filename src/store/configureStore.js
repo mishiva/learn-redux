@@ -4,7 +4,7 @@ import rootReducer from '../reducers';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
-import { watchFriendsRequest } from '../sagas';
+import root from '../sagas';
 
 function configureStore(initialState) {
   const store = createStore(
@@ -13,7 +13,7 @@ function configureStore(initialState) {
     applyMiddleware(
       thunk,
       createLogger(),
-      createSagaMiddleware(watchFriendsRequest)
+      createSagaMiddleware(root)
     )
   )
 
