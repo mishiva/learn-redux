@@ -5,7 +5,8 @@ module.exports = {
   create(req, res) {
     return Todo
       .create({
-        text: req.body.text,
+        text: req.body.text || 'name of todo is undefined',
+        completed: req.body.complete || false
       })
       .then(todo => res.status(201).send(todo))
       .catch(error => res.status(400).send(error));
@@ -27,7 +28,7 @@ module.exports = {
         }
         return todo
           .destroy()
-          .then(() => res.status(200).send(`Todo with id ${req.params.id} is deleted!`))
+          .then(() => res.status(200).send(req.params.id))
           .catch(error => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));
@@ -45,7 +46,7 @@ module.exports = {
         return todo
           .update({
             text: req.body.text || todo.text,
-            completed: req.body.completed || todo.completed || false
+            complete: req.body.complete || todo.complete || false
           })
           .then(() => res.status(200).send(todo))
           .catch(error => res.status(400).send(error));
