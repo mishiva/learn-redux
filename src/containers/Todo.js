@@ -5,19 +5,31 @@ import Todo from '../components/todo';
 import * as todoActions from '../actions/TodoActions';
 
 class TodoPage extends Component {
+
+  componentDidMount() {
+    console.log(this.props.todoActions.getTodos)
+    this.props.todoActions.getTodos();
+  }
+
+  componentWillUnmount() {
+    this.props.todoActions.resetTodos();
+  }
+
   render() {
     const { todo } = this.props
-    const { addTodo, removeTodo } = this.props.todoActions
+    const todoActions = this.props.todoActions
     return (
       <div>
         <Todo
-          addTodo={addTodo}
-          removeTodo={removeTodo}
+          getTodos={todoActions.getTodos}
+          addTodo={todoActions.addTodo}
+          removeTodo={todoActions.removeTodo}
           todos={todo.todos}
         />
       </div>
     );
   }
+  resetTodos
 }
 
 function mapStateToProps(state) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 export default class Todo extends Component {
+
   handleAddTodo() {
     const inp = this.refs.inp;
     const val = inp.value.replace(/\s/, '');

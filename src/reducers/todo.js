@@ -1,10 +1,14 @@
 import {
   ADD_TODO,
-  REMOVE_TODO
+  REMOVE_TODO,
+  GET_TODOS_SUCCEEDED,
+  TODO_REQUEST_FAILED,
+  TODO_REQUEST_PENDING
 } from '../constants/Todo'
 
 const initialState = {
-  todos: []
+  todos: [],
+  pending: false
 }
 
 
@@ -28,6 +32,24 @@ export default function todo(state = initialState, action) {
           ]
         })
     }
+
+    case GET_TODOS_SUCCEEDED:
+      return Object.assign({}, state, {
+        todos: action.payload,
+        message: '',
+        pending: false
+      })
+
+    case TODO_REQUEST_FAILED:
+      return Object.assign({}, state, {
+        message: action.payload,
+        pending: false
+      })
+
+    case TODO_REQUEST_PENDING:
+      return Object.assign({}, state, {
+        pending: true
+      })
 
     default: {
       return state
