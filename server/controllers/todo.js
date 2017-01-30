@@ -2,46 +2,46 @@ const Todo = require('../models').Todo;
 
 
 module.exports = {
-  create(req, res) {
+  create(req, res, next) {
     return Todo
       .create({
         text: req.body.text || 'name of todo is undefined',
         completed: req.body.complete || false
       })
       .then(todo => res.status(201).send(todo))
-      .catch(error => res.status(400).send(error));
+      .catch(error => next(error));
   },
-  list(req, res) {
+  list(req, res, next) {
     return Todo
       .all()
       .then(todos => res.status(201).send(todos))
-      .catch(error => res.status(400).send(error));
+      .catch(error => next(error));
   },
-  delete(req, res) {
+  delete(req, res, next) {
     return Todo
       .findById(req.params.id)
       .then(todo => {
         if (!todo) {
-          return res.status(400).send({
-            message: 'Todo Not Found',
-          });
+          let error = new Error('Todo Not Found')
+          error.status = 400;
+          return next(error);
         }
         return todo
           .destroy()
           .then(() => res.status(200).send(req.params.id))
-          .catch(error => res.status(400).send(error));
+          .catch(error => next(error));
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => next(error));
   },
 
-  update(req, res) {
+  update(req, res, next) {
     return Todo
       .findById(req.params.id)
       .then(todo => {
         if (!todo) {
-          return res.status(400).send({
-            message: 'Todo Not Found',
-          });
+          let error = new Error('Todo Not Found')
+          error.status = 400;
+          return next(error);
         }
         return todo
           .update({
@@ -49,9 +49,9 @@ module.exports = {
             complete: req.body.complete || todo.complete || false
           })
           .then(() => res.status(200).send(todo))
-          .catch(error => res.status(400).send(error));
+          .catch(error => next(error));
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => next(error));
   },
 
 };

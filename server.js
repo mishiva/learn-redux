@@ -27,6 +27,12 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + '/index.html')
 });
 
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(err.status || 500)
+  .send(error || new Error('500 Server Error!'))
+});
+
 require('./server/routes')(rootRouter);
 app.use('/api/v1', rootRouter);
 
