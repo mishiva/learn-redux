@@ -3,7 +3,9 @@ import { fork } from 'redux-saga/effects'
 import { watchFriendsRequest } from './friends'
 import { watchAuthRequest, watchLogoutRequest, watchGetUserRequest } from './auth'
 import {
-  watchGetTodosRequest
+  watchGetTodosRequest,
+  watchAddTodoRequest,
+  watchRemoveTodoRequest
 } from './todo'
 
 
@@ -13,6 +15,8 @@ export default function* root() {
     fork(watchAuthRequest),
     fork(watchLogoutRequest),
     fork(watchGetUserRequest),
-    fork(watchGetTodosRequest)
+    fork(watchGetTodosRequest),
+    fork(watchAddTodoRequest),
+    fork(watchRemoveTodoRequest)
   ]
 }

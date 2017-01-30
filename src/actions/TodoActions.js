@@ -1,32 +1,15 @@
 import {
-  ADD_TODO,
-  REMOVE_TODO,
   GET_TODOS_REQUEST,
   GET_TODOS_SUCCEEDED,
   TODO_REQUEST_FAILED,
-  TODO_REQUEST_PENDING
+  TODO_REQUEST_PENDING,
+  ADD_TODO_REQUEST,
+  ADD_TODO_SUCCEEDED,
+  REMOVE_TODO_REQUEST,
+  REMOVE_TODO_SUCCEEDED
 } from '../constants/Todo'
 
-let nextTodoId = 0;
-export function addTodo(text) {
-  return {
-    type: ADD_TODO,
-    payload: {
-      text,
-      id: nextTodoId++
-    }
-  }
-}
-
-export function removeTodo(id) {
-  return {
-    type: REMOVE_TODO,
-    payload: id
-  }
-}
-
-
-
+// GET TODOS LIST
 export const getTodos = () => {
   return {
     type: GET_TODOS_REQUEST
@@ -47,6 +30,40 @@ export const resetTodos = () => {
   }
 }
 
+// CREATE TODO
+export function addTodo(text) {
+  return {
+    type: ADD_TODO_REQUEST,
+    payload: {
+      text,
+      completed: false
+    }
+  }
+}
+
+export const addTodoSuccess = (todo) => {
+  return {
+    type: ADD_TODO_SUCCEEDED,
+    payload: todo
+  }
+}
+
+// REMOVE
+export function removeTodo(id) {
+  return {
+    type: REMOVE_TODO_REQUEST,
+    payload: id
+  }
+}
+
+export const removeTodoSuccess = (id) => {
+  return {
+    type: REMOVE_TODO_SUCCEEDED,
+    payload: id
+  }
+}
+
+// FAIL & PENDING
 export const requestFail = (message) => {
   return {
     type: TODO_REQUEST_FAILED,

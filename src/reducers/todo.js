@@ -1,6 +1,6 @@
 import {
-  ADD_TODO,
-  REMOVE_TODO,
+  ADD_TODO_SUCCEEDED,
+  REMOVE_TODO_REQUEST,
   GET_TODOS_SUCCEEDED,
   TODO_REQUEST_FAILED,
   TODO_REQUEST_PENDING
@@ -14,16 +14,15 @@ const initialState = {
 
 export default function todo(state = initialState, action) {
   switch(action.type) {
-    case ADD_TODO: {
+    case ADD_TODO_SUCCEEDED: {
       return Object.assign({}, state, {
           todos: [...state.todos, {
-            text: action.payload.text,
-            id: action.payload.id
+            text: action.payload.text
           }]
         })
     }
 
-    case REMOVE_TODO: {
+    case REMOVE_TODO_REQUEST: {
     const indx = state.todos.findIndex(x => x.id === action.payload)
       return Object.assign({}, state, {
           todos: [

@@ -7,7 +7,6 @@ import * as todoActions from '../actions/TodoActions';
 class TodoPage extends Component {
 
   componentDidMount() {
-    console.log(this.props.todoActions.getTodos)
     this.props.todoActions.getTodos();
   }
 
