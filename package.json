@@ -39,7 +39,12 @@
   },
   "dependencies": {
     "babel-runtime": "^6.6.1",
+    "bcryptjs": "^2.4.0",
     "es6-promise": "^4.0.5",
+    "jsonwebtoken": "^7.2.1",
+    "lodash": "^4.17.4",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
     "react": "^0.14.7",

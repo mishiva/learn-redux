@@ -28,7 +28,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     role: DataTypes.STRING,
     password:  {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       set: function(val)  {
         var salt = bcrypt.genSaltSync(8);

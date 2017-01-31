@@ -1,4 +1,6 @@
 const User = require('../models').User;
+const messages = require('../responseMessages');
+var Sequelize = require('sequelize');
 
 module.exports = {
   create(req, res, next) {
@@ -9,8 +11,15 @@ module.exports = {
         email: req.body.email,
         password: req.body.password,
       })
-      .then(todo => res.status(201).send(todo))
-      .catch(error => next(error));
+      .then(user => {
+        return res.status(201).send({
+          success: true, message: messages.registration.success
+        })
+      })
+      .catch(Sequelize.ValidationError, (err) => {
+        return res.status(400).send({success: false, errors: err.errors})
+        // return next(error);
+      });
   },
 
 };
