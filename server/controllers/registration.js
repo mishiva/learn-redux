@@ -13,13 +13,17 @@ module.exports = {
       })
       .then(user => {
         return res.status(201).send({
-          success: true, message: messages.registration.success
+          success: true, serverMessage: messages.registration.success
         })
       })
       .catch(Sequelize.ValidationError, (err) => {
+        console.log(err)
         return res.status(400).send({success: false, errors: err.errors})
         // return next(error);
-      });
+      })
+      .catch(err => {
+        return next(error);
+      })
   },
 
 };

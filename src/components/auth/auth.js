@@ -7,12 +7,12 @@ import { bindActionCreators } from 'redux';
 import * as authActions from '../../actions/AuthActions';
 import BaseModal from '../BaseModal';
 import AuthForm from './AuthForm/AuthForm';
+import Registration from '../registration/Registration';
 
 
 class Auth extends Component {
 
   componentWillMount() {
-    console.log('&&&&&& WILL MOUNT &&&&&&')
     const email = window.localStorage.getItem('token')
     email && this.props.authActions.getUserRequest(email);
   }
@@ -38,9 +38,8 @@ class Auth extends Component {
                   authProceeding={authProceeding}/>
               </BaseModal>
             </Portal>
-            <button className='registration-btn' onClick={::this.handleRegistration}>
-              Registration
-            </button>
+            <Registration />
+
           </div>
         ) : (
           <div>
@@ -50,10 +49,6 @@ class Auth extends Component {
         )}
       </div>
     );
-  }
-
-  handleRegistration() {
-    alert(' Show Registration Modal ');
   }
 
   handleSubmit(data) {

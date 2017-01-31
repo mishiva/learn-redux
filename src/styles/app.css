@@ -253,3 +253,14 @@ html, body {
   padding: 10px;
   text-align: center;
 }
+
+.error {
+  color: red;
+}
+.success {
+  color: green;
+}
+.hidden {
+  display: none;
+  overflow: hidden;
+}
