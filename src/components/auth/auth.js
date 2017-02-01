@@ -13,8 +13,8 @@ import Registration from '../registration/Registration';
 class Auth extends Component {
 
   componentWillMount() {
-    const email = window.localStorage.getItem('token')
-    email && this.props.authActions.getUserRequest(email);
+    const token = window.localStorage.getItem('token')
+    token && this.props.authActions.getUserRequest(token);
   }
 
   componentWillReceiveProps(nextProps) {

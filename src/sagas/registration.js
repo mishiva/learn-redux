@@ -4,25 +4,9 @@ import {
   REGISTRATION_REQUEST
 } from '../constants/Registration'
 import * as authActions from '../actions/RegistrationActions'
-import CONFIG from '../config';
+import {registration} from '../api';
 import { SubmissionError } from 'redux-form';
 
-function regUserApi(data) {
-  return fetch(
-    `${CONFIG.apiUrl}/registration`
-    ,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response => {
-      return response.json()
-    })
-    .then(json => json)
-}
 
 function addValidationErrors(errors) {
     if (!errors) return;
@@ -38,7 +22,7 @@ function addValidationErrors(errors) {
 function* regUser(action) {
   try {
     yield put(authActions.regProceeding(true));
-    const res = yield call(regUserApi, action.payload.data);
+    const res = yield call(registration, action.payload.data);
     yield put(authActions.regResponse(res));
     if (!res.success) {
       yield call(action.payload.reject, addValidationErrors(res.errors) );

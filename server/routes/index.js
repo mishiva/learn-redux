@@ -1,18 +1,23 @@
 const todoController = require('../controllers').todo;
 const registrationController = require('../controllers').registration;
+const authorizationController = require('../controllers').authorization;
+const userController = require('../controllers').user;
 
-module.exports = (router) => {
-  router.get('/', (req, res) => {
-    return res.status(200).send({
-      message: 'Welcome to the Todo API!',
-    });
-  });
+module.exports = (router, auth) => {
+  router.post('/registration', registrationController.create);
+  router.post('/auth', authorizationController.login);
 
+  // token required routes
+  router.use(auth.authenticate());
+
+  // todo
   router.post('/todo', todoController.create);
   router.get('/todo', todoController.list);
   router.delete('/todo/:id', todoController.delete);
   router.put('/todo/:id', todoController.update);
 
-  router.post('/registration', registrationController.create);
+  // user
+  router.get('/user', userController.getCurrentUser);
+
 
 };

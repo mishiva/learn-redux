@@ -1,5 +1,6 @@
 'use strict';
 var bcrypt = require('bcryptjs');
+var _ = require('lodash');
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
@@ -44,7 +45,12 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+      },
+
+      toJSON: function (data) {
+        return _.pick(data, ['id', 'first_name', 'last_name', 'email'])
       }
+
     }
   });
   return User;
