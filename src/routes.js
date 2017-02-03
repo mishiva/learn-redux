@@ -14,7 +14,8 @@ import Years from './containers/Years'
 // Redirects to /login by default
 const IsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth, // how to get the user state
-  predicate: auth => auth.isAuth,
+  authenticatingSelector: state => state.isAuth,
+  // predicate: auth => auth.isAuth,
   redirectAction: routerActions.replace, // the redux action to dispatch for redirect
   wrapperDisplayName: 'IsAuthenticated' // a nice name for this auth check
 })
