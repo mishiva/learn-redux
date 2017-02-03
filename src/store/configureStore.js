@@ -8,11 +8,13 @@ import { routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers';
 // import { ping } from '../enhancers/ping';
 import { redirect } from '../enhancers/redirect';
-import root from '../sagas';
+import rootSaga from '../sagas';
 
 const routingMiddleware = routerMiddleware(hashHistory);
 
 function configureStore(initialState) {
+  const sagaMiddleware = createSagaMiddleware(rootSaga)
+
   const store = createStore(
     rootReducer,
     initialState,
@@ -20,10 +22,14 @@ function configureStore(initialState) {
       routingMiddleware,
       thunk,
       createLogger(),
-      createSagaMiddleware(root),
+      sagaMiddleware,
       redirect
     )
   )
+  // sagaMiddleware.run(getUserRequest);
+
+  // Extensions
+  store.runSaga = sagaMiddleware.run;
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {

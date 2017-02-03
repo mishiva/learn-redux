@@ -6,14 +6,8 @@ import * as authActions from '../actions/AuthActions';
 import Header from '../layouts/header'
 import Nav from '../layouts/nav'
 import Footer from '../layouts/footer'
-import { getTokenValue } from '../helpers/auth'
-
 
 class App extends Component {
-  componentWillMount() {
-    const token = getTokenValue()
-    token && this.props.authActions.getUserRequest();
-  }
 
   render() {
     return (

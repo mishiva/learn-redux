@@ -46,7 +46,6 @@ export function* watchLogoutRequest() {
 
 // GET USER
 function* getUser() {
-  console.log(12333)
   try {
     const res = yield call(API.getUserData);
     yield put(authActions.authSuccess(res.data));
@@ -58,3 +57,8 @@ function* getUser() {
 export function* watchGetUserRequest() {
   yield* takeEvery(GET_USER_REQUEST, getUser)
 }
+
+export function* getUserRequest() {
+  yield* getUser();
+}
+
