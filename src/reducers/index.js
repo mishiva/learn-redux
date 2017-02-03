@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form'
-
+import { routerReducer } from 'react-router-redux'
 
 import years from './years';
 import user from './user';
@@ -14,7 +14,8 @@ export const rootReducer = combineReducers({
   user,
   auth,
   registration,
-  form: formReducer
+  form: formReducer,
+  routing: routerReducer
 });
 
 export default rootReducer;

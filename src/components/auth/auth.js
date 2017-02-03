@@ -8,13 +8,13 @@ import * as authActions from '../../actions/AuthActions';
 import BaseModal from '../BaseModal';
 import AuthForm from './AuthForm/AuthForm';
 import Registration from '../registration/Registration';
-
+import { getTokenValue } from '../../helpers/auth'
 
 class Auth extends Component {
 
   componentWillMount() {
-    const token = window.localStorage.getItem('token')
-    token && this.props.authActions.getUserRequest(token);
+    const token = getTokenValue()
+    token && this.props.authActions.getUserRequest();
   }
 
   componentWillReceiveProps(nextProps) {

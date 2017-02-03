@@ -8,6 +8,7 @@ import {
 import * as authActions from '../actions/AuthActions'
 import API from '../api';
 import { browserHistory } from 'react-router'
+import { setToken, removeToken } from '../helpers/auth'
 
 function* authUser(action) {
   try {
@@ -16,7 +17,7 @@ function* authUser(action) {
     if(!res.success) {
       yield put(authActions.authFail(res.error));
     } else {
-      window.localStorage.setItem('token', res.data.token);
+      setToken(res.data.token);
       yield put(authActions.authSuccess(res.data));
     }
   } catch (e) {
@@ -31,7 +32,7 @@ export function* watchAuthRequest() {
 // LOGOUT
 function* logoutUser() {
   try {
-    window.localStorage.removeItem('token')
+    removeToken()
     yield put(authActions.logoutSuccess());
     browserHistory.push('/')
   } catch (e) {
@@ -45,6 +46,7 @@ export function* watchLogoutRequest() {
 
 // GET USER
 function* getUser() {
+  console.log(12333)
   try {
     const res = yield call(API.getUserData);
     yield put(authActions.authSuccess(res.data));

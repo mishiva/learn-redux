@@ -1,5 +1,6 @@
 import isomorphicFetch from 'isomorphic-fetch';
 import CONFIG from './config';
+import { getTokenValue } from './helpers/auth';
 
 function resToJSON(response) {
   return response.json().then(json => json)
@@ -10,7 +11,8 @@ function fetch(endpoint, method, body = null, authorized = true) {
     'Content-Type': 'application/json'
   }
   if (authorized) {
-    headers['x-access-token'] = window.localStorage.getItem('token')
+    const token = getTokenValue()
+    headers['x-access-token'] = token
   }
   let params = {
     method, headers
