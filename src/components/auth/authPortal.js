@@ -11,24 +11,27 @@ import AuthForm from './AuthForm/AuthForm';
 class AuthPortal extends Component {
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isAuth) {
+    if (nextProps.auth.isAuth) {
       this.refs.authPortal.closePortal();
+      const query = this.context.router.location.query;
+      let redirectUrl = query && query.redirect ? decodeURIComponent(query.redirect) : '/';
+      this.context.router.push(redirectUrl);
     }
   }
 
   render() {
     const { authProceeding } = this.props.auth;
-    console.log(this.props)
+    const { isOpened, openByClickOn } = this.props;
     return (
-      <div>
-        <Portal ref='authPortal' closeOnEsc isOpened={true}>
-          <BaseModal modalClassName='auth-modal'>
+        <Portal
+          ref='authPortal' closeOnEsc isOpened={isOpened}
+          openByClickOn={openByClickOn}>
+          <BaseModal modalClassName='auth-modal' closeModalCallback={::this.handleClosePortal}>
             <AuthForm
               onSubmit={::this.handleSubmit}
               authProceeding={authProceeding}/>
           </BaseModal>
         </Portal>
-      </div>
     );
   }
 
@@ -37,8 +40,18 @@ class AuthPortal extends Component {
     authRequest(data)
   }
 
+  handleClosePortal() {
+    const path = this.context.router.location.pathname;
+    if (path == '/login') {
+      this.context.router.push('/');
+    }
+  }
+
 }
 
+AuthPortal.contextTypes = {
+  router: React.PropTypes.object
+}
 
 function mapStateToProps(state) {
   return {

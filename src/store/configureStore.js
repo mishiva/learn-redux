@@ -26,17 +26,9 @@ function configureStore(initialState) {
       redirect
     )
   )
-  // sagaMiddleware.run(getUserRequest);
 
   // Extensions
   store.runSaga = sagaMiddleware.run;
-
-  if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers').rootReducer;
-      store.replaceReducer(nextRootReducer);
-    });
-  }
 
   return store;
 }

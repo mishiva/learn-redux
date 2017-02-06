@@ -26,7 +26,7 @@ export default class BaseModal extends Component {
           <button
             className='modal-close'
             ref='modalClose'
-            onClick={this.props.closePortal}>x</button>
+            onClick={::this.handleCloseModal}>x</button>
           <div className='modal-body' ref='modalBody'>
             {React.cloneElement(this.props.children, {closePortal: this.props.closePortal})}
           </div>
@@ -35,12 +35,18 @@ export default class BaseModal extends Component {
     );
   }
 
+  handleCloseModal() {
+    this.props.closePortal()
+    this.props.closeModalCallback && this.props.closeModalCallback()
+  }
+
   handleMouseClickOutside(e) {
     if (isNodeInRoot(e.target, findDOMNode(this.refs.modalContent))) {
       return;
     }
     e.stopPropagation();
     this.props.closePortal();
+    this.props.closeModalCallback && this.props.closeModalCallback()
   }
 
 }

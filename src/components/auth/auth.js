@@ -1,38 +1,22 @@
 import React, { Component } from 'react';
-import Portal from 'react-portal';
-// import { Promise } from 'es6-promise';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as authActions from '../../actions/AuthActions';
-import BaseModal from '../BaseModal';
-import AuthForm from './AuthForm/AuthForm';
 import Registration from '../registration/Registration';
-// import { getTokenValue } from '../../helpers/auth'
+import AuthPortal from '../../components/auth/authPortal';
 
 class Auth extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isAuth) {
-      this.refs.authPortal.closePortal();
-    }
-  }
-
   render() {
     const authBtn = <button className='auth-btn'>Authorizaiton</button>
-    const { authProceeding, isAuth, user } = this.props.auth;
+    const { isAuth, user } = this.props.auth;
     return (
       <div>
         {/* Portals */}
         {!isAuth ? (
           <div>
-            <Portal ref='authPortal' closeOnEsc openByClickOn={authBtn}>
-              <BaseModal modalClassName='auth-modal'>
-                <AuthForm
-                  onSubmit={::this.handleSubmit}
-                  authProceeding={authProceeding}/>
-              </BaseModal>
-            </Portal>
+            <AuthPortal openByClickOn={authBtn} />
             <Registration />
 
           </div>
@@ -44,11 +28,6 @@ class Auth extends Component {
         )}
       </div>
     );
-  }
-
-  handleSubmit(data) {
-    const { authRequest } = this.props.authActions
-    authRequest(data)
   }
 
   handleLogout() {

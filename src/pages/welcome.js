@@ -13,7 +13,7 @@ export default class Welcome extends Component {
     return (
       <div>
         <h1>Welcome to react router!</h1>
-        {routePath == '/login' && <div><AuthPortal /></div>}
+        {routePath == '/login' && <div><AuthPortal isOpened={true} /></div>}
       </div>
     );
   }
