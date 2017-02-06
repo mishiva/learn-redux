@@ -60,10 +60,13 @@ const API = {
   },
 
   // USER
-  getUserData() {
+  getCurrentUserData() {
     return fetch('user', 'GET')
-  }
+  },
 
+  fetchUsers() {
+    return fetch('user/list', 'GET')
+  }
 
 }
 

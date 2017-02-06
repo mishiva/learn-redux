@@ -19,4 +19,12 @@ module.exports = {
 
   },
 
+  list(req, res, next) {
+    const { limit, offset } = req.body;
+    return User.findAndCountAll({ limit, offset })
+      .then(result => res.status(201).send(result))
+      .catch(error => next(error));
+  },
+
+
 };

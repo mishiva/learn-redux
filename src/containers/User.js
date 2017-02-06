@@ -6,13 +6,14 @@ import * as userActions from '../actions/UserActions';
 
 class UserPage extends Component {
   render() {
-    const { user } = this.props
+    const { user, auth } = this.props
     const { getFriends } = this.props.userActions
     return (
       <div>
         <User
           rows={10}
           user={user}
+          auth={auth}
           getFriends={getFriends}
         />
       </div>
@@ -22,7 +23,8 @@ class UserPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
+    auth: state.auth
   }
 }
 

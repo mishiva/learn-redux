@@ -10,6 +10,7 @@ module.exports = {
         last_name: req.body.last_name,
         email: req.body.email,
         password: req.body.password,
+        role: 'client'
       })
       .then(user => {
         return res.status(201).send({

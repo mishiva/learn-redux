@@ -18,6 +18,7 @@ module.exports = (router, auth) => {
 
   // user
   router.get('/user', userController.getCurrentUser);
+  router.get('/user/list', userController.list);
 
 
 };

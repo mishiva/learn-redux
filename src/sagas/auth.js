@@ -7,7 +7,7 @@ import {
 } from '../constants/Auth'
 import * as authActions from '../actions/AuthActions'
 import API from '../api';
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 import { setToken, removeToken } from '../helpers/auth'
 
 function* authUser(action) {
@@ -34,7 +34,7 @@ function* logoutUser() {
   try {
     removeToken()
     yield put(authActions.logoutSuccess());
-    browserHistory.push('/')
+    hashHistory.push('/')
   } catch (e) {
     yield put(authActions.logoutFail(e.message));
   }
@@ -47,7 +47,7 @@ export function* watchLogoutRequest() {
 // GET USER
 function* getUser() {
   try {
-    const res = yield call(API.getUserData);
+    const res = yield call(API.getCurrentUserData);
     yield put(authActions.authSuccess(res.data));
   } catch (e) {
     console.log(e.message);
