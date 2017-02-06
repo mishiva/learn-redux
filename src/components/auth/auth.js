@@ -16,7 +16,7 @@ class Auth extends Component {
         {/* Portals */}
         {!isAuth ? (
           <div>
-            <AuthPortal openByClickOn={authBtn} />
+            <AuthPortal auth={this.props.auth} openByClickOn={authBtn} isOpened={false} />
             <Registration />
 
           </div>

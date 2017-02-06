@@ -27,14 +27,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({origin: 'http://localhost:3000'}));
 app.use(auth.initialize());
 
-app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html')
-});
-
 
 require('./server/routes')(rootRouter, auth);
 app.use('/api/v1', rootRouter);
 
+app.get(/.*/, function root(req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
 app.use(function (err, req, res, next) {
   console.error(err.stack);
   let error = err ? err : new Error('Unknown Server Error!');

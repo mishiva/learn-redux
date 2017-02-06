@@ -1,5 +1,6 @@
 import { takeEvery } from 'redux-saga'
 import { put, call } from 'redux-saga/effects'
+import { push } from 'react-router-redux'
 import {
   AUTH_USER_REQUEST,
   LOGOUT_USER_REQUEST,
@@ -7,8 +8,9 @@ import {
 } from '../constants/Auth'
 import * as authActions from '../actions/AuthActions'
 import API from '../api';
-import { hashHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 import { setToken, removeToken } from '../helpers/auth'
+
 
 function* authUser(action) {
   try {
@@ -19,6 +21,10 @@ function* authUser(action) {
     } else {
       setToken(res.data.token);
       yield put(authActions.authSuccess(res.data));
+      if (window.location.search.search('redirect') == 1) {
+        const url = window.location.search.split('=')[1]
+        yield put(push(window.decodeURIComponent(url)))
+      }
     }
   } catch (e) {
     yield put(authActions.authFail(e.message));
@@ -34,7 +40,7 @@ function* logoutUser() {
   try {
     removeToken()
     yield put(authActions.logoutSuccess());
-    hashHistory.push('/')
+    browserHistory.push('/')
   } catch (e) {
     yield put(authActions.logoutFail(e.message));
   }

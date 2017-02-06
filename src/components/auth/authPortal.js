@@ -1,23 +1,15 @@
 import React, { Component } from 'react';
 import Portal from 'react-portal';
 // import { Promise } from 'es6-promise';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
 
-import * as authActions from '../../actions/AuthActions';
+import store from '../../store/configureStore'
+import { authRequest } from '../../actions/AuthActions';
 import BaseModal from '../BaseModal';
 import AuthForm from './AuthForm/AuthForm';
 
-class AuthPortal extends Component {
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuth) {
-      this.refs.authPortal.closePortal();
-      const query = this.context.router.location.query;
-      let redirectUrl = query && query.redirect ? decodeURIComponent(query.redirect) : '/';
-      this.context.router.push(redirectUrl);
-    }
-  }
+export default class AuthPortal extends Component {
 
   render() {
     const { authProceeding } = this.props.auth;
@@ -36,8 +28,7 @@ class AuthPortal extends Component {
   }
 
   handleSubmit(data) {
-    const { authRequest } = this.props.authActions;
-    authRequest(data)
+    store.dispatch(authRequest(data));
   }
 
   handleClosePortal() {
@@ -53,17 +44,3 @@ AuthPortal.contextTypes = {
   router: React.PropTypes.object
 }
 
-function mapStateToProps(state) {
-  return {
-    auth: state.auth
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    authActions: bindActionCreators(authActions, dispatch)
-  }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthPortal);

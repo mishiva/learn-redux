@@ -22,7 +22,7 @@ module.exports = {
   list(req, res, next) {
     const { limit, offset } = req.body;
     return User.findAndCountAll({ limit, offset })
-      .then(result => res.status(201).send(result))
+      .then(result => res.json(result))
       .catch(error => next(error));
   },
 

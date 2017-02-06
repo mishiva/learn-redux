@@ -8,13 +8,13 @@ module.exports = {
         text: req.body.text || 'name of todo is undefined',
         completed: req.body.complete || false
       })
-      .then(todo => res.status(201).send(todo))
+      .then(todo => res.json(todo))
       .catch(error => next(error));
   },
   list(req, res, next) {
     return Todo
       .all()
-      .then(todos => res.status(201).send(todos))
+      .then(todos => res.json(todos))
       .catch(error => next(error));
   },
   delete(req, res, next) {
@@ -28,7 +28,7 @@ module.exports = {
         }
         return todo
           .destroy()
-          .then(() => res.status(200).send(req.params.id))
+          .then(() => res.json(req.params.id))
           .catch(error => next(error));
       })
       .catch(error => next(error));
@@ -48,7 +48,7 @@ module.exports = {
             text: req.body.text || todo.text,
             complete: req.body.complete || todo.complete || false
           })
-          .then(() => res.status(200).send(todo))
+          .then(() => res.json(todo))
           .catch(error => next(error));
       })
       .catch(error => next(error));
