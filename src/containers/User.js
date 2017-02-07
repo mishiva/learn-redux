@@ -7,14 +7,14 @@ import * as userActions from '../actions/UserActions';
 class UserPage extends Component {
   render() {
     const { user, auth } = this.props
-    const { getFriends } = this.props.userActions
+    const { getUsers } = this.props.userActions
     return (
       <div>
         <User
-          rows={10}
           user={user}
           auth={auth}
-          getFriends={getFriends}
+          getUsers={getUsers}
+          perPage={5}
         />
       </div>
     );

@@ -1,6 +1,6 @@
 import { fork } from 'redux-saga/effects'
 
-import { watchFriendsRequest } from './friends'
+import { watchUsersRequest } from './user'
 import { watchAuthRequest, watchLogoutRequest, watchGetUserRequest } from './auth'
 import { watchRegistrationRequest } from './registration'
 import {
@@ -12,7 +12,7 @@ import {
 
 export default function* root() {
   yield [
-    fork(watchFriendsRequest),
+    fork(watchUsersRequest),
     fork(watchAuthRequest),
     fork(watchRegistrationRequest),
     fork(watchLogoutRequest),

@@ -1,38 +1,39 @@
 import {
   // GET_FRIENDS_REQUEST,
-  FETCHING_FRIENDS,
-  FRIENDS_FETCH_SUCCEEDED,
-  FRIENDS_FETCH_FAILED
+  GET_USERS_LIST_PROCEEDING,
+  GET_USERS_LIST_SUCCEEDED,
+  GET_USERS_LIST_FAILED
 } from '../constants/User'
 
 const initialState = {
-  name: 'name',
-  surname: 'someSurname',
-  age: 42,
-  friends: [],
+  data: {
+    rows: [],
+    count: 0,
+    offset: 0
+  },
   message: '',
-  fetching: false
+  proceeding: false
 }
 
 export default function user(state = initialState, action) {
   switch(action.type) {
 
-    case FRIENDS_FETCH_SUCCEEDED:
+    case GET_USERS_LIST_SUCCEEDED:
       return Object.assign({}, state, {
-        friends: action.payload,
+        data: action.payload,
         message: '',
-        fetching: false
+        proceeding: false
       })
 
-    case FRIENDS_FETCH_FAILED:
+    case GET_USERS_LIST_FAILED:
       return Object.assign({}, state, {
         message: action.payload,
-        fetching: false
+        proceeding: false
       })
 
-    case FETCHING_FRIENDS:
+    case GET_USERS_LIST_PROCEEDING:
       return Object.assign({}, state, {
-        fetching: true
+        proceeding: action.payload.proceeding
       })
 
     default:

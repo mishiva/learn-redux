@@ -1,6 +1,8 @@
 import isomorphicFetch from 'isomorphic-fetch';
 import CONFIG from './config';
 import { getTokenValue } from './helpers/auth';
+import { reduce } from 'lodash';
+
 
 function resToJSON(response) {
   return response.json().then(json => json)
@@ -17,7 +19,14 @@ function fetch(endpoint, method, body = null, authorized = true) {
   let params = {
     method, headers
   }
-  if (body) params.body = JSON.stringify(body);
+  if (body) {
+    if (method == 'POST') params.body = JSON.stringify(body);
+    if (method == 'GET') {
+      endpoint += reduce(body, (memo, value, key) => {
+         return `${memo + key}=${value}&`;
+        }, '?').slice(0, -1)
+    }
+  }
   return isomorphicFetch(
     `${CONFIG.apiUrl}/${endpoint}`, params
     ).then(resToJSON)
@@ -25,12 +34,6 @@ function fetch(endpoint, method, body = null, authorized = true) {
 
 
 const API = {
-
-  // FRIENDS
-  fetchFriendsApi(rows) {
-    return isomorphicFetch(`http://www.filltext.com/?rows=${rows}&fname={firstName}&lname={lastName}&pretty=true`)
-      .then(resToJSON)
-  },
 
   // TODOS
   fetchTodos() {
@@ -64,8 +67,8 @@ const API = {
     return fetch('user', 'GET')
   },
 
-  fetchUsers() {
-    return fetch('user/list', 'GET')
+  fetchUsers(query) {
+    return fetch('user/list', 'GET', query)
   }
 
 }

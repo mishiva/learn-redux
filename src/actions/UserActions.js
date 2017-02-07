@@ -1,34 +1,34 @@
 import {
-  GET_FRIENDS_REQUEST,
-  FRIENDS_FETCH_SUCCEEDED,
-  FRIENDS_FETCH_FAILED,
-  FETCHING_FRIENDS
+  GET_USERS_LIST_REQUEST,
+  GET_USERS_LIST_SUCCEEDED,
+  GET_USERS_LIST_FAILED,
+  GET_USERS_LIST_PROCEEDING
 } from '../constants/User'
 
-export const getFriends = (rows) => {
+export const getUsers = (limit, offset) => {
   return {
-    type: GET_FRIENDS_REQUEST,
-    payload: rows
+    type: GET_USERS_LIST_REQUEST,
+    payload: {limit, offset}
   }
 }
 
-export const fetchFriendsSuccess = (friends) => {
+export const getUsersSuccess = (result) => {
   return {
-    type: FRIENDS_FETCH_SUCCEEDED,
-    payload: friends
+    type: GET_USERS_LIST_SUCCEEDED,
+    payload: result // rows, count, offset
   }
 }
 
-export const fetchFriendsFail = (message) => {
+export const getUsersFail = (message) => {
   return {
-    type: FRIENDS_FETCH_FAILED,
+    type: GET_USERS_LIST_FAILED,
     payload: message
   }
 }
 
-export const fetchingFriends = (fetching) => {
+export const getUsersProceeding = (proceeding) => {
   return {
-    type: FETCHING_FRIENDS,
-    payload: fetching
+    type: GET_USERS_LIST_PROCEEDING,
+    payload: proceeding
   }
 }

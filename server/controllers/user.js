@@ -20,9 +20,13 @@ module.exports = {
   },
 
   list(req, res, next) {
-    const { limit, offset } = req.body;
+    console.log(req)
+    const { limit, offset } = req.query;
     return User.findAndCountAll({ limit, offset })
-      .then(result => res.json(result))
+      .then(result => {
+        result.offset = offset;
+        return res.json({success: true, data: result})
+      })
       .catch(error => next(error));
   },
 
