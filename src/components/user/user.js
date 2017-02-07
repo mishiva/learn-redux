@@ -1,18 +1,71 @@
 import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
+import classNames from 'classnames';
 
+import AddressModal from './AddressModal';
+
+
+class UserItem extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = { showEditMenu: false };
+  }
+
+  render() {
+    const { user } = this.props;
+    const editAddressBtn = <li>Edit Address</li>
+    return (
+      <tr>
+        <td>{user.first_name}</td>
+        <td>{user.last_name}</td>
+        <td>{user.email}</td>
+        <td>{user.role}</td>
+        <td>
+          <div className='edit-menu-wrap'>
+            <button onClick={::this.handleMenuClick}>menu</button>
+            <div
+              className={classNames({'edit-menu': true, 'visible': this.state.showEditMenu})}>
+              <ul>
+                <AddressModal isOpened={false} userId={user.id} openByClickOn={editAddressBtn} onOpen={::this.onModalOpen} />
+                <li onClick={::this.handleEditUser}>Edit User</li>
+              </ul>
+            </div>
+          </div>
+        </td>
+      </tr>
+    );
+  }
+
+  toggleEditMenu(toggle) {
+    this.setState({showEditMenu: toggle || !this.state.showEditMenu})
+  }
+
+  handleMenuClick() {
+    this.toggleEditMenu();
+  }
+
+  onModalOpen() {
+    this.toggleEditMenu(false)
+  }
+
+  // handleEditAddress() {
+  //   console.log(this.props.user);
+  //   this.setState({openAddressModal: true})
+  //   this.toggleEditMenu();
+  // }
+
+  handleEditUser() {
+    console.log(this.props.user);
+    this.toggleEditMenu();
+  }
+
+}
 
 class UserList extends Component {
   render() {
-    let nodes = this.props.data.map(function(user, index) {
-      return (
-        <tr key={index}>
-          <td>{user.first_name}</td>
-          <td>{user.last_name}</td>
-          <td>{user.email}</td>
-          <td>{user.role}</td>
-        </tr>
-      );
+    const nodes = this.props.data.map(function(user, index) {
+      return <UserItem key={index} user={user} />
     });
 
     return (
@@ -24,6 +77,7 @@ class UserList extends Component {
               <th>Last Name</th>
               <th>Email</th>
               <th>Role</th>
+              <th>Edit</th>
             </tr>
             {nodes}
           </tbody>

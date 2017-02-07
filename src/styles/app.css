@@ -221,7 +221,7 @@ html, body {
 /* modal */
 
 .modal-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -312,4 +312,28 @@ tr {
 .pagination a {
   display: block;
   padding: 20%;
+}
+
+
+.edit-menu-wrap {
+  // position: relative; 
+}
+.edit-menu {
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  background: lightskyblue;
+  // z-index: 1;
+  padding: 9px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px #585656;
+}
+.edit-menu li {
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+.visible {
+  opacity: 1;
+  visibility: visible;
 }
