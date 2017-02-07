@@ -12,8 +12,8 @@ import API from '../api';
 function* fetchTodos() {
   try {
     yield put(todoActions.requestPending(true));
-    const todos = yield call(API.fetchTodos);
-    yield put(todoActions.getTodosSuccess(todos));
+    const result = yield call(API.fetchTodos);
+    yield put(todoActions.getTodosSuccess(result.data));
   } catch (e) {
     console.log(e);
     yield put(todoActions.requestFail(e.message));
@@ -29,8 +29,8 @@ export function* watchGetTodosRequest() {
 function* addTodo(action) {
   try {
     yield put(todoActions.requestPending(true));
-    const todo = yield call(API.addTodo, action.payload);
-    yield put(todoActions.addTodoSuccess(todo));
+    const result = yield call(API.addTodo, action.payload);
+    yield put(todoActions.addTodoSuccess(result.data));
   } catch (e) {
     yield put(todoActions.requestFail(e.message));
   }
@@ -45,8 +45,8 @@ export function* watchAddTodoRequest() {
 function* removeTodo(action) {
   try {
     yield put(todoActions.requestPending(true));
-    const todoId = yield call(API.removeTodo, action.payload);
-    yield put(todoActions.removeTodoSuccess(todoId));
+    const result = yield call(API.removeTodo, action.payload);
+    yield put(todoActions.removeTodoSuccess(result.data));
   } catch (e) {
     yield put(todoActions.requestFail(e.message));
   }

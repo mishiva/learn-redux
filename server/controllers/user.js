@@ -2,6 +2,7 @@ const User = require('../models').User;
 var Sequelize = require('sequelize');
 var jwt = require('jsonwebtoken');
 var config = require('../config/config');
+const { shapeResult } = require('../helpers');
 
 module.exports = {
   getCurrentUser(req, res, next) {
@@ -11,21 +12,17 @@ module.exports = {
         error.status = 404;
         return next(error);
       }
-      return res.json({
-        success: true,
-        data: User.toJSON(user)
-      });
+      return res.json(shapeResult(User.toJSON(user)));
     }).catch(error => next(error));
 
   },
 
   list(req, res, next) {
-    console.log(req)
     const { limit, offset } = req.query;
     return User.findAndCountAll({ limit, offset })
       .then(result => {
         result.offset = offset;
-        return res.json({success: true, data: result})
+        return res.json(shapeResult(result));
       })
       .catch(error => next(error));
   },

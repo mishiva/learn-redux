@@ -3,6 +3,8 @@ var Sequelize = require('sequelize');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var config = require('../config/config');
+const { shapeResult } = require('../helpers');
+const _ = require('lodash');
 
 module.exports = {
   login(req, res, next) {
@@ -29,18 +31,9 @@ module.exports = {
       const token = jwt.sign({id: user.id}, config.jwt.secret, {
         expiresIn: '2d'
       });
-
-      return res.json({
-        success: true,
-        data: {
-          id: user.id,
-          token: token,
-          first_name: user.first_name,
-          last_name: user.last_name,
-          email: user.email
-        }
-
-      });
+      let data = _.pick(user, ['id', 'first_name', 'last_name', 'email'])
+      data.token = token;
+      return res.json(shapeResult(data));
 
     }).catch(error => next(error));
 
