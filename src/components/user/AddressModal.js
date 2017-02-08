@@ -1,35 +1,36 @@
 import React, { Component } from 'react';
 import Portal from 'react-portal';
+import { pick } from 'lodash';
 
-// import store from '../../store/configureStore'
-// import { authRequest } from '../../actions/AuthActions';
 import BaseModal from '../BaseModal';
 import AddressForm from './AddressForm';
 
 export default class AddressModal extends Component {
 
   render() {
-    const { isOpened, openByClickOn, onOpen } = this.props;
     return (
         <Portal
+          {...this.props}
           ref='addressPortal'
           closeOnEsc
-          isOpened={isOpened}
-          openByClickOn={openByClickOn}
-          onOpen={onOpen}>
+          onClose={::this.handlePortalClose} >
           <BaseModal modalClassName='address-modal'>
-            <AddressForm onSubmit={::this.handleSubmit} />
+            <AddressForm onSubmit={::this.handleSubmit} userId={this.props.userId} />
           </BaseModal>
         </Portal>
     );
   }
 
   handleSubmit(data) {
-    data.userId = this.props.userId
-    console.log(data)
-    // store.dispatch(authRequest(data));
+    console.log(data);
+    const userData = pick(data, ['city', 'house', 'street']);
+    const { updateAddress, userId } = this.props
+    updateAddress(userId, userData)
   }
 
+  handlePortalClose() {
+    this.props.resetAddress()
+  }
 
 }
 

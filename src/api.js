@@ -20,7 +20,7 @@ function fetch(endpoint, method, body = null, authorized = true) {
     method, headers
   }
   if (body) {
-    if (method == 'POST') params.body = JSON.stringify(body);
+    if (method == 'POST' || method == 'PUT') params.body = JSON.stringify(body);
     if (method == 'GET') {
       endpoint += reduce(body, (memo, value, key) => {
          return `${memo + key}=${value}&`;
@@ -69,6 +69,14 @@ const API = {
 
   fetchUsers(query) {
     return fetch('user/list', 'GET', query)
+  },
+
+  getUserAddress(userId) {
+    return fetch(`user/address/${userId}`, 'GET')
+  },
+
+  updateUserAddress(userId, data) {
+    return fetch(`user/address/${userId}`, 'PUT', data)
   }
 
 }

@@ -14,11 +14,12 @@ module.exports = (router, auth) => {
   router.post('/todo', todoController.create);
   router.get('/todo', todoController.list);
   router.delete('/todo/:id', todoController.delete);
-  router.put('/todo/:id', todoController.update);
 
   // user
   router.get('/user', userController.getCurrentUser);
-  router.get('/user/list', userController.list);
+  router.get('/user/list', userController.userList);
+  router.get('/user/address/:userId', userController.getAddress);
+  router.put('/user/address/:userId', userController.updateAddress);
 
 
 };

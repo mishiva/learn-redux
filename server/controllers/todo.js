@@ -32,26 +32,6 @@ module.exports = {
           .catch(error => next(error));
       })
       .catch(error => next(error));
-  },
-
-  update(req, res, next) {
-    return Todo
-      .findById(req.params.id)
-      .then(todo => {
-        if (!todo) {
-          let error = new Error('Todo Not Found')
-          error.status = 400;
-          return next(error);
-        }
-        return todo
-          .update({
-            text: req.body.text || todo.text,
-            complete: req.body.complete || todo.complete || false
-          })
-          .then(() => res.json(shapeResult(todo)))
-          .catch(error => next(error));
-      })
-      .catch(error => next(error));
-  },
+  }
 
 };

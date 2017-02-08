@@ -4,7 +4,7 @@ export default class Todo extends Component {
 
   handleAddTodo() {
     const inp = this.refs.inp;
-    const val = inp.value.replace(/\s/, '');
+    const val = inp.value.trim();
     if(!val) return;
     this.props.addTodo(val);
     inp.value = '';

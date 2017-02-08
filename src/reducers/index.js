@@ -6,6 +6,7 @@ import years from './years';
 import user from './user';
 import todo from './todo';
 import auth from './auth';
+import address from './address';
 import registration from './registration';
 
 export const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
   user,
   auth,
   registration,
+  address,
   form: formReducer,
   routing: routerReducer
 });

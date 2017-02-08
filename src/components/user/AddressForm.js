@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
-
+import { connect } from 'react-redux';
 
 import validate from './addressValidation';
 import renderField from '../../helpers/renderField';
+import { getAddress } from '../../actions/UserActions';
 
 
 class AddressForm extends Component {
+ 
+  componentDidMount() {
+    this.props.load(this.props.userId);
+  }
+
+  componentWillUnmount() {
+    this.props.reset()
+  }
+
   render() {
     const { handleSubmit } = this.props;
+    console.log(this.props)
     return (
       <div>
         <h1>Address</h1>
@@ -27,7 +38,15 @@ class AddressForm extends Component {
 }
 
 
-export default reduxForm({
+const addressform = reduxForm({
   form: 'AddressForm',
-  validate
+  validate,
+  enableReinitialize: true
 })(AddressForm)
+
+export default connect(
+  state => ({
+    initialValues: state.address.address
+  }),
+  { load: getAddress }
+)(addressform)

@@ -2,7 +2,7 @@
   "development": {
     "username": "test_auth",
     "password": "12345",
-    "database": "test_auth",
+    "database": "testdb",
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
@@ -10,7 +10,7 @@
   "test": {
     "username": "test_auth",
     "password": "12345",
-    "database": "test_auth",
+    "database": "testdb",
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
@@ -18,7 +18,7 @@
   "production": {
     "username": "test_auth",
     "password": "12345",
-    "database": "test_auth",
+    "database": "testdb",
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
