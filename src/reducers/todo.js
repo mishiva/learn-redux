@@ -17,7 +17,8 @@ export default function todo(state = initialState, action) {
     case ADD_TODO_SUCCEEDED: {
       return Object.assign({}, state, {
           todos: [...state.todos, {
-            text: action.payload.text
+            text: action.payload.text,
+            id: action.payload.id
           }]
         })
     }
