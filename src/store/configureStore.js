@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { browserHistory } from 'react-router'
+import { hashHistory } from 'react-router'
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
@@ -10,7 +10,7 @@ import rootReducer from '../reducers';
 // import { redirect } from '../enhancers/redirect';
 import rootSaga from '../sagas';
 
-const routingMiddleware = routerMiddleware(browserHistory);
+const routingMiddleware = routerMiddleware(hashHistory);
 
 function configureStore(initialState) {
   const sagaMiddleware = createSagaMiddleware(rootSaga)

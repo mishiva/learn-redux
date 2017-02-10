@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as authActions from '../actions/AuthActions';
 
 import AuthPortal from '../components/auth/authPortal';
+import './welcome.scss';
 
 
 class Welcome extends Component {
@@ -18,6 +19,7 @@ class Welcome extends Component {
     return (
       <div>
         <h1>Welcome to react router!</h1>
+        <div className='welcome-img'></div>
         {!isAuth && routePath == '/login' && <div><AuthPortal auth={this.props.auth} isOpened={true} /></div>}
       </div>
     );

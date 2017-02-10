@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import AddressModal from './AddressModal';
 
+import './userList.scss';
+
 class UserItem extends Component {
 
   constructor(props) {

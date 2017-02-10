@@ -1,16 +1,18 @@
+import './styles/main.scss';
+
 import React from 'react'
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import './styles/app.css';
 import store from './store/configureStore'
-import { Router, browserHistory } from 'react-router'
+import { Router, hashHistory } from 'react-router'
 import { routes } from './routes'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import { isTokenValid, removeToken } from './helpers/auth'
 import { getUserRequest } from './sagas/auth'
 
-const history = syncHistoryWithStore(browserHistory, store)
+
+const history = syncHistoryWithStore(hashHistory, store)
 
 const node = (
     <Provider store={store}>

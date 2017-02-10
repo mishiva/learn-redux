@@ -1,0 +1,37 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  opacity: 0.8;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: lightskyblue;
+  max-width: 500px;
+  width: 80%;
+  padding: 10px 0;
+}
+
+.modal-close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  color: #000;
+}
+
+.modal-body {
+  padding: 10px;
+  text-align: center;
+}
