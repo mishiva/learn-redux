@@ -15,7 +15,6 @@ class Welcome extends Component {
   render() {
     const routePath = this.props.route.path
     const { isAuth } = this.props.auth
-    console.log('WELCOME', this.props)
     return (
       <div>
         <h1>Welcome to react router!</h1>

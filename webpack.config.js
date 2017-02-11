@@ -17,7 +17,7 @@ let config = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].[hash].js',
-    publicPath: '/'
+    publicPath: ''
   },
   resolve: {
     extensions: ['', '.js'],
@@ -31,8 +31,9 @@ let config = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(NODE_ENV)
-      }
+        NODE_ENV: JSON.stringify(NODE_ENV),
+        IS_DEVELOP: JSON.stringify(IS_DEVELOP)
+      },
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
@@ -61,7 +62,7 @@ let config = {
     ],
     loaders: [
       {
-        loaders: ['babel'],
+        loaders: ['react-hot-loader/webpack','babel'],
         include: [
           path.resolve(__dirname, 'src'),
         ],
@@ -102,7 +103,7 @@ if(IS_DEVELOP) {
     devtool: 'source-map', //source-map
     debug: true,
   })
-  config.entry.unshift('webpack-hot-middleware/client')
+  config.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client?http://localhost:3000')
   plugins.push(new webpack.HotModuleReplacementPlugin())
 } else {
   plugins.push(
@@ -118,8 +119,7 @@ if(IS_DEVELOP) {
     })
   )
 }
-
 Array.prototype.unshift.apply(config.plugins, plugins);
-
 console.log(config)
+
 module.exports = config;
