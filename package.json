@@ -8,7 +8,10 @@
     "serve": "NODE_ENV=development node client-dev-server.js",
     "nodeserver": "NODE_ENV=development nodemon server.js",
     "build": "NODE_ENV=production webpack",
-    "serve:prod": "NODE_ENV=production webpack && http-server build/"
+    "build:info": "NODE_ENV=production webpack --display-modules -v",
+    "build:stats": "NODE_ENV=production webpack --json --profile > stats.json",
+    "serve:prod": "NODE_ENV=production webpack && http-server build/",
+    "build:progress": "NODE_ENV=production webpack --progress --profile --colors --display-error-details --display-cached --bail"
   },
   "author": "",
   "license": "ISC",
@@ -46,7 +49,7 @@
     "sass-loader": "^5.0.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.14",
+    "webpack": "^1.14.0",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.16.1"
   },

@@ -33,13 +33,12 @@ function configureStore(initialState) {
   // Extensions
   store.runSaga = sagaMiddleware.run;
 
-  if(process.env.IS_DEVELOP) {
-    if (module.hot) {
-      module.hot.accept('../reducers', () => {
-        const nextRootReducer = require('../reducers')
-        store.replaceReducer(nextRootReducer)
-      })
-    }
+
+  if (process.env.IS_DEVELOP && module.hot) {
+    module.hot.accept('../reducers', () => {
+      const nextRootReducer = require('../reducers')
+      store.replaceReducer(nextRootReducer)
+    })
   }
 
   return store;

@@ -27,7 +27,6 @@ let config = {
     modulesDirectories: ['node_modules'],
   },
   plugins: [
-    new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -40,7 +39,6 @@ let config = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       'window.$': 'jquery',
-      _: 'lodash',
     }),
     new ExtractTextPlugin('styles.[contenthash].css', {
       allChunks: true,
@@ -62,7 +60,7 @@ let config = {
     ],
     loaders: [
       {
-        loaders: ['react-hot-loader/webpack','babel'],
+        loaders: ['react-hot-loader/webpack', 'babel-loader?cacheDirectory'],
         include: [
           path.resolve(__dirname, 'src'),
         ],
@@ -94,28 +92,52 @@ let config = {
   sassLoader: {
     outputStyle: IS_DEVELOP ? 'expanded' : 'compressed',
     sourceMap: IS_DEVELOP
-  }
+  },
+  eslint: {
+    failOnWarning: false,
+    failOnError: true
+  },
+  stats: {
+    hash: true,
+    version: true,
+    timings: true,
+    assets: true,
+    chunks: true,
+    modules: true,
+    reasons: true,
+    children: true,
+    source: false,
+    errors: true,
+    errorDetails: true,
+    warnings: true,
+    publicPath: true
+  },
 }
 
 let plugins = [];
 if(IS_DEVELOP) {
   Object.assign(config, {
-    devtool: 'source-map', //source-map
+    devtool: 'cheap-module-eval-source-map', //source-map
     debug: true,
+    cache: true,
+    watchOptions: {timeout: 100}
   })
   config.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client?http://localhost:3000')
   plugins.push(new webpack.HotModuleReplacementPlugin())
 } else {
   plugins.push(
+    new webpack.NoErrorsPlugin(),
     new CleanPlugin([ 'build' ]),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         dead_code: true,
         drop_debugger: true,
-        unsafe: true,
-        evaluate: true,
         unused: true,
+        warnings: false,
+        evaluate: true,
+        unsafe: true
       },
+      sourceMap: false
     })
   )
 }

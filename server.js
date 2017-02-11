@@ -9,7 +9,7 @@ var config = require('./server/config/config');
 var auth = require("./server/auth/auth")(); 
 
 var app = new (express)();
-var port = 8080;
+var port = 9000;
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

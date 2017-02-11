@@ -20,7 +20,7 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use(logger('dev'));
 
-const apiProxy = proxy(config.apiUrl, { target: 'http://localhost:8080' });
+const apiProxy = proxy(config.apiUrl, { target: 'http://localhost:9000' });
 app.use(config.apiUrl, apiProxy);
 
 app.get('/', function root(req, res) {

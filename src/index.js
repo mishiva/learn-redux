@@ -43,7 +43,7 @@ if (isTokenValid()) {
   renderApp(rootNode);
 }
 
-if (module.hot) {
+if (process.env.IS_DEVELOP && module.hot) {
   module.hot.accept('./containers/Root', () => {
     const NextRoot = require('./containers/Root').default;
     renderApp(getNodeHMR(NextRoot));
