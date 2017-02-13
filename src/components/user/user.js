@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 
 import UserList from './UserList';
+import './user.scss';
+
 
 export default class User extends Component {
 

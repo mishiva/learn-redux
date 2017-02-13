@@ -1,25 +1,15 @@
 var webpack = require('webpack');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
-var webpackConfig = require('./webpack.config');
 var express = require('express');
 var rootRouter = express.Router();
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-// var config = require('./config/config');
+var config = require('./server/config/config');
 var auth = require("./server/auth/auth")(); 
 
 var app = new (express)();
-var port = 3000;
-
-var compiler = webpack(webpackConfig);
-app.use(webpackDevMiddleware(compiler, {
-  noInfo: true, publicPath: webpackConfig.output.publicPath
-}));
-
-app.use(webpackHotMiddleware(compiler));
+var port = 9000;
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -29,7 +19,7 @@ app.use(auth.initialize());
 
 
 require('./server/routes')(rootRouter, auth);
-app.use('/api/v1', rootRouter);
+app.use(config.apiUrl, rootRouter);
 
 app.get(/.*/, function root(req, res) {
   res.sendFile(__dirname + '/index.html');

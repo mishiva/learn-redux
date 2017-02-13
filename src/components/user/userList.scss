@@ -1,0 +1,18 @@
+
+.edit-menu-wrap {
+
+}
+.edit-menu {
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  background: lightskyblue;
+  padding: 9px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px #585656;
+  li {
+    margin-bottom: 4px;
+    cursor: pointer;
+  }
+}

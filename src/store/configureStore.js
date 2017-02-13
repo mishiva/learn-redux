@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { browserHistory } from 'react-router'
-import createLogger from 'redux-logger';
+import { hashHistory } from 'react-router'
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'react-router-redux';
@@ -10,25 +9,37 @@ import rootReducer from '../reducers';
 // import { redirect } from '../enhancers/redirect';
 import rootSaga from '../sagas';
 
-const routingMiddleware = routerMiddleware(browserHistory);
+const routingMiddleware = routerMiddleware(hashHistory);
+const sagaMiddleware = createSagaMiddleware(rootSaga)
+
+let middlewawres = [
+  routingMiddleware,
+  thunk,
+  sagaMiddleware
+]
+if(process.env.IS_DEVELOP) {
+  // const createLogger = require('redux-logger');
+  // middlewawres.push(createLogger())
+}
 
 function configureStore(initialState) {
-  const sagaMiddleware = createSagaMiddleware(rootSaga)
 
   const store = createStore(
     rootReducer,
     initialState,
-    applyMiddleware(
-      routingMiddleware,
-      thunk,
-      createLogger(),
-      sagaMiddleware
-      // redirect
-    )
+    applyMiddleware(...middlewawres)
   )
 
   // Extensions
   store.runSaga = sagaMiddleware.run;
+
+
+  if (process.env.IS_DEVELOP && module.hot) {
+    module.hot.accept('../reducers', () => {
+      const nextRootReducer = require('../reducers')
+      store.replaceReducer(nextRootReducer)
+    })
+  }
 
   return store;
 }

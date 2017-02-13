@@ -1,0 +1,30 @@
+/* footer */
+.footer {
+  padding: 10px;
+  background-color: darkcyan;
+  position: absolute;
+  width: 96%;
+  height: 90px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+.copyrights {
+  margin-left: 2%;
+}
+.footer-nav {
+  margin-left: 2%;
+}
+.sponsors {
+  margin-right: 2%;
+}
+.sponsors__item {
+  
+}
+
+.footer-nav { 
+  .nav {
+    display: initial;
+  }
+}

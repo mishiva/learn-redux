@@ -4,7 +4,8 @@ const CONFIG = {
     session: {
       session: false
     }
-  }
+  },
+  apiUrl: '/api/v1'
 }
 
 module.exports = CONFIG;

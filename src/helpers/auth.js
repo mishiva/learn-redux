@@ -11,7 +11,11 @@ export const setToken = (token) => {
 }
 
 export const getToken = () => {
-  return JSON.parse(window.localStorage.getItem('token'));
+  try {
+    return JSON.parse(window.localStorage.getItem('token'));
+  } catch (e) {
+    return null;
+  }  
 }
 
 export const removeToken = () => {

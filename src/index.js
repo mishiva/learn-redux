@@ -1,22 +1,30 @@
+import './styles/main.scss';
+
 import React from 'react'
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import './styles/app.css';
 import store from './store/configureStore'
-import { Router, browserHistory } from 'react-router'
-import { routes } from './routes'
+import { hashHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import { isTokenValid, removeToken } from './helpers/auth'
 import { getUserRequest } from './sagas/auth'
 
-const history = syncHistoryWithStore(browserHistory, store)
+import { AppContainer } from 'react-hot-loader';
+import Root from './containers/Root';
 
-const node = (
-    <Provider store={store}>
-      <Router history={history} routes={routes} />
-    </Provider>
-);
+const history = syncHistoryWithStore(hashHistory, store)
+
+const getNodeHMR = (RootComponent) => {
+  return (
+    <AppContainer>
+      <RootComponent store={store} history={history} />
+    </AppContainer>
+  );
+}
+
+const rootNode = (
+  <Root store={store} history={history} />
+)
 
 const renderApp = (node) => {
   render(
@@ -28,12 +36,18 @@ const renderApp = (node) => {
 
 if (isTokenValid()) {
   store.runSaga(getUserRequest).done.then(() => {
-    renderApp(node);
+    renderApp(rootNode);
   })
 } else {
   removeToken()
-  renderApp(node);
+  renderApp(rootNode);
 }
 
-
+if (process.env.IS_DEVELOP && module.hot) {
+  module.hot.accept('./containers/Root', () => {
+    const NextRoot = require('./containers/Root').default;
+    renderApp(getNodeHMR(NextRoot));
+  })
+   module.hot.accept()
+ }
 
