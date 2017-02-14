@@ -9,7 +9,7 @@ const BtnStyle = {
 }
 
 const bodyStyle = {
-  'max-height': '100%'
+  'maxHeight': '100%'
 }
 
 

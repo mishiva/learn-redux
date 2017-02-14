@@ -46,7 +46,7 @@ html, body {
   font: 14px Arial, sans-serif;
 }
 .container {
-  padding: 0 2%;
+  padding: 0 2% 0 0;
   width: 100%;
   position: relative;
   min-height: 100%;
@@ -56,44 +56,21 @@ html, body {
   height: 100%;
 }
 
-.btn {
-  border: none;
-  border-radius: 2px;
-  display: inline-block;
-  height: 36px;
-  line-height: 36px;
-  font-size: 16px;
-  outline: 0;
-  padding: 0 2rem;
-  text-transform: uppercase;
-  vertical-align: middle;
-  color: #fff;
-  background-color: #6383a8;
+.main {
+  margin-left: 240px;
+}
+.content {
+  padding: 20px 2% 90px;
+}
+h2 {
   text-align: center;
-  letter-spacing: .5px;
-  transition: .2s ease-out;
-  cursor: pointer;
-  margin: 0 5px;
-  &:hover {
-    background-color: #6d8cb0
-  }
+  display: block;
+  color: rgba(0,0,0,.38);
+  font-size: 20px;
+  padding: 20px 0px;
+  font-family: Roboto, sans-serif;
 }
 
-/* form */
-.form-error {
-  color: red;
-  font-size: 12px;
-}
-.form-input {
-  margin-bottom: 10px;
-}
-
-.error {
-  color: red;
-}
-.success {
-  color: green;
-}
 .hidden {
   display: none;
   overflow: hidden;

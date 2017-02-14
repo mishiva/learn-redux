@@ -3,11 +3,11 @@
   padding: 10px;
   background-color: darkcyan;
   position: absolute;
-  width: 96%;
+  width: calc(98% - 240px);
   height: 90px;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  // left: 50%;
+  // transform: translateX(-50%);
   color: white;
 }
 .copyrights {

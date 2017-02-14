@@ -9,7 +9,6 @@ export default class Header extends Component {
   render() {
     return (
       <AppBar
-        title='React App'
         iconElementRight={<Auth/>}
       />
     );

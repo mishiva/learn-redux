@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import MenuItem from 'material-ui/MenuItem';
 
 export default class NavLink extends Component {
   render() {
-    return <Link {...this.props} activeClassName='active'/>
+    const { onlyActiveOnIndex, to, primaryText, leftIcon } = this.props
+    return <MenuItem
+        leftIcon={leftIcon}
+        primaryText={primaryText}
+        containerElement={<Link onlyActiveOnIndex={onlyActiveOnIndex} to={to}  />}
+        activeClassName='active' />
   }
 }
 
