@@ -27,7 +27,12 @@ class Auth extends Component {
         {/* Portals */}
         {!isAuth ? (
           <div>
-            <AuthPortal auth={this.props.auth} isOpened={this.state.isOpened} handleClose={::this.handleClose} />
+            <AuthPortal
+              auth={this.props.auth}
+              isOpened={this.state.isOpened}
+              handleClose={::this.handleClose}
+              submitForm={this.props.authActions.submitForm}
+            />
             <RaisedButton label='Authorizaiton' style={BtnStyle} onClick={::this.handleAuth} />
             <Registration />
           </div>

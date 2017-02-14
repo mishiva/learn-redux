@@ -1,3 +1,4 @@
+import { submit } from 'redux-form'
 import {
   AUTH_USER_REQUEST,
   AUTH_USER_SUCCESS,
@@ -37,6 +38,10 @@ export const authRequest = (authData) => {
     type: AUTH_USER_REQUEST,
     payload: authData
   }
+}
+
+export const submitForm = () => {
+  return submit('authForm')
 }
 
 // LOGOUT

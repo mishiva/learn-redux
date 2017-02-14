@@ -1,3 +1,4 @@
+import { submit } from 'redux-form'
 import {
   REGISTRATION_REQUEST,
   REGISTRATION_RESPONSE,
@@ -5,6 +6,7 @@ import {
   REGISTRATION_SUCCESS,
   REGISTRATION_FAIL
 } from '../constants/Registration'
+
 
 // REGISTRATION
 export const regResponse = (data) => {
@@ -42,4 +44,8 @@ export const regRequest = (data, resolve, reject) => {
       data, resolve, reject
     }
   }
+}
+
+export const submitForm = () => {
+  return submit('regForm')
 }

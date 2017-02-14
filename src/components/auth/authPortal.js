@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-// import Portal from 'react-portal';
 
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import { submit } from 'redux-form'
-
-import store from '../../store/configureStore'
-// import { authRequest } from '../../actions/AuthActions';
-// import BaseModal from '../BaseModal';
 import AuthForm from './AuthForm/AuthForm';
 
 const BtnStyle = {
@@ -21,12 +15,6 @@ const bodyStyle = {
 
 export default class AuthPortal extends Component {
 
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   isOpened: props.isOpened || false
-    // }
-  }
 
   render() {
     const { authProceeding } = this.props.auth;
@@ -63,8 +51,7 @@ export default class AuthPortal extends Component {
   }
 
   handleSubmit() {
-    // store.dispatch(authRequest(data));
-    store.dispatch(submit('authForm'));
+    this.props.submitForm()
   }
 
   handleClose() {

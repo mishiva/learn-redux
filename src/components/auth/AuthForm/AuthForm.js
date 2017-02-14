@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import store from '../../../store/configureStore'
 import { authRequest } from '../../../actions/AuthActions';
 import validate from '../authValidation';
-import renderField from '../../../helpers/renderField';
+import { renderTextField } from '../../../helpers/renderField';
 
 
 class AuthForm extends Component {
@@ -15,8 +15,9 @@ class AuthForm extends Component {
       <div>
         <h1>Authorization</h1>
         <form onSubmit={handleSubmit}>
-          <Field name='email' type='email' component={renderField} label='Email'/>
-          <Field name='password' type='password' component={renderField} label='Password'/>
+          <Field name='email' type='email' component={renderTextField} label='Email'/>
+          <br />
+          <Field name='password' type='password' component={renderTextField} label='Password'/>
         </form>
       </div>
     );

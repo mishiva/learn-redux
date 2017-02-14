@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
 import validate from './registrationValidation';
-import renderField from '../../helpers/renderField';
+import { Promise } from 'es6-promise';
+import { renderTextField } from '../../helpers/renderField';
 import classNames from 'classnames';
-
+import store from '../../store/configureStore'
+import { regRequest } from '../../actions/RegistrationActions';
 
 class RegForm extends Component {
 
@@ -11,12 +13,8 @@ class RegForm extends Component {
     !this.props.success && nextProps.success && nextProps.reset();
   }
 
-  componentWillUnmount() {
-
-  }
-
   render() {
-    const { handleSubmit, regProceeding, success, serverMessage } = this.props;
+    const { handleSubmit, success, serverMessage } = this.props;
     const messageClasses = classNames({
       'reg-message': true,
       'error': !success,
@@ -27,13 +25,16 @@ class RegForm extends Component {
       <div>
         <h1>Registration</h1>
         <form onSubmit={handleSubmit}>
-          <Field name='first_name' type='text' component={renderField} label='First Name'/>
-          <Field name='last_name' type='text' component={renderField} label='Last Name'/>
-          <Field name='email' type='email' component={renderField} label='Email'/>
-          <Field name='password' type='password' component={renderField} label='Password'/>
+          <Field name='first_name' type='text' component={renderTextField} label='First Name'/>
+          <br />
+          <Field name='last_name' type='text' component={renderTextField} label='Last Name'/>
+          <br />
+          <Field name='email' type='email' component={renderTextField} label='Email'/>
+          <br />
+          <Field name='password' type='password' component={renderTextField} label='Password'/>
+          <br />
           <div>
             <p className={messageClasses}>{serverMessage}</p>
-            <button type='submit' disabled={regProceeding}>Submit</button>
           </div>
         </form>
       </div>
@@ -44,5 +45,10 @@ class RegForm extends Component {
 
 export default reduxForm({
   form: 'regForm',
-  validate
+  validate,
+  onSubmit: (data) => {
+    return new Promise((resolve, reject) => {
+      store.dispatch(regRequest(data, resolve, reject))
+    });
+  }
 })(RegForm)
