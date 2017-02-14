@@ -2,22 +2,21 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form'
 
 
+import store from '../../../store/configureStore'
+import { authRequest } from '../../../actions/AuthActions';
 import validate from '../authValidation';
 import renderField from '../../../helpers/renderField';
 
 
 class AuthForm extends Component {
   render() {
-    const { handleSubmit, authProceeding } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <div>
         <h1>Authorization</h1>
         <form onSubmit={handleSubmit}>
           <Field name='email' type='email' component={renderField} label='Email'/>
           <Field name='password' type='password' component={renderField} label='Password'/>
-          <div>
-            <button type='submit' disabled={authProceeding}>Submit</button>
-          </div>
         </form>
       </div>
     );
@@ -28,5 +27,6 @@ class AuthForm extends Component {
 
 export default reduxForm({
   form: 'authForm',
-  validate
+  validate,
+  onSubmit: (data) => {store.dispatch(authRequest(data))}
 })(AuthForm)

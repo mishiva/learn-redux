@@ -1,30 +1,53 @@
-import './styles/main.scss';
-
-import React from 'react'
-import { render } from 'react-dom';
-import store from './store/configureStore'
+// react
+import React, { Component } from 'react'
 import { hashHistory } from 'react-router'
+import { render } from 'react-dom';
 import { syncHistoryWithStore } from 'react-router-redux'
+import { AppContainer } from 'react-hot-loader';
+// mui
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
+import './styles/main.scss';
+import store from './store/configureStore'
 import { isTokenValid, removeToken } from './helpers/auth'
 import { getUserRequest } from './sagas/auth'
-
-import { AppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
 
 const history = syncHistoryWithStore(hashHistory, store)
 
+injectTapEventPlugin();
+
+class MuiComponent extends Component {
+  render() {
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        {this.props.children}
+      </MuiThemeProvider>
+    )
+  }
+}
+
+
 const getNodeHMR = (RootComponent) => {
   return (
     <AppContainer>
-      <RootComponent store={store} history={history} />
+      <MuiComponent>
+        <RootComponent store={store} history={history} />
+      </MuiComponent>
     </AppContainer>
   );
 }
 
+
 const rootNode = (
-  <Root store={store} history={history} />
+  <MuiComponent>
+    <Root store={store} history={history} />
+  </MuiComponent>
 )
+
 
 const renderApp = (node) => {
   render(
@@ -42,6 +65,7 @@ if (isTokenValid()) {
   removeToken()
   renderApp(rootNode);
 }
+
 
 if (process.env.IS_DEVELOP && module.hot) {
   module.hot.accept('./containers/Root', () => {

@@ -8,8 +8,11 @@ import './welcome.scss';
 
 
 class Welcome extends Component {
-  componentWillMount() {
-    
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpened: true
+    }
   }
 
   render() {
@@ -19,9 +22,13 @@ class Welcome extends Component {
       <div>
         <h1>Welcome to react router!</h1>
         <div className='welcome-img'></div>
-        {!isAuth && routePath == '/login' && <div><AuthPortal auth={this.props.auth} isOpened={true} /></div>}
+        {!isAuth && routePath == '/login' && <div><AuthPortal auth={this.props.auth} isOpened={this.state.isOpened} handleClose={::this.handleClose} /></div>}
       </div>
     );
+  }
+
+  handleClose() {
+    this.setState({isOpened: false})
   }
 
 }

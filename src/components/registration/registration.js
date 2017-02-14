@@ -3,6 +3,7 @@ import Portal from 'react-portal';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Promise } from 'es6-promise';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import * as regActions from '../../actions/RegistrationActions';
 import BaseModal from '../BaseModal';
@@ -12,7 +13,7 @@ import RegForm from './RegistrationForm';
 class Registration extends Component {
 
   render() {
-    const regBtn = <button className='reg-btn'>Registration</button>
+    const regBtn = <RaisedButton label='Registration' className='reg-btn' />
     const registration = this.props.registration;
     return (
       <Portal ref='regPortal' closeOnEsc openByClickOn={regBtn}>
