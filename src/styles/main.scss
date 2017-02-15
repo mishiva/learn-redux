@@ -46,19 +46,28 @@ html, body {
   font: 14px Arial, sans-serif;
 }
 .container {
-  padding: 0 2% 0 0;
+  // padding: 0 2%;
   width: 100%;
   position: relative;
   min-height: 100%;
+  &.__opened-drawer {
+    // padding: 0 2% 0 0;
+  }
 }
 
 #root {
   height: 100%;
 }
 
+
 .main {
-  margin-left: 240px;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+  .__opened-drawer & {
+    margin-left: 240px;
+  }
 }
+
 .content {
   padding: 20px 2% 90px;
 }

@@ -8,6 +8,7 @@ export default class NavLink extends Component {
     return <MenuItem
         leftIcon={leftIcon}
         primaryText={primaryText}
+        value={to}
         containerElement={<Link onlyActiveOnIndex={onlyActiveOnIndex} to={to}  />}
         activeClassName='active' />
   }

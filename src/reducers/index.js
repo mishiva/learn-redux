@@ -8,8 +8,10 @@ import todo from './todo';
 import auth from './auth';
 import address from './address';
 import registration from './registration';
+import app from './app';
 
 export const rootReducer = combineReducers({
+  app,
   todo,
   years,
   user,

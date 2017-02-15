@@ -1,16 +1,6 @@
 /* nav */
 .nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-flow: row nowrap;
   a.active {
-    color: lightskyblue;
+    background-color: #80DEEA !important;
   }
-}
-
-.main-nav {
-  min-width: 300px;
-  max-width: 500px;
-  margin: 30px auto 0 auto;
 }

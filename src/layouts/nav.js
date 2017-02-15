@@ -5,13 +5,37 @@ import Home from 'material-ui/svg-icons/action/home';
 import Done from 'material-ui/svg-icons/action/done';
 import Alarm from 'material-ui/svg-icons/action/alarm';
 import Accessibility from 'material-ui/svg-icons/action/accessibility';
+import { cyan200 } from 'material-ui/styles/colors';
 
 import './nav.scss';
+const menuStyle = {
+  activeItem: {
+    backgroundColor: cyan200
+  }
+}
 
 export default class Nav extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: '/'
+    }
+  }
+
+  handleChange(event, value) {
+    console.log(value)
+    this.setState({ value });
+  }
+
   render() {
     return (
-      <Menu>
+      <Menu
+        selectedMenuItemStyle={menuStyle.activeItem}
+        onChange={this.handleChange}
+        value={this.state.value}
+        className='nav'
+        >
         <NavLink to='/' leftIcon={<Home />} onlyActiveOnIndex={true} primaryText='Welcome' />
         <NavLink leftIcon={<Accessibility />} to='/user' primaryText='User' />
         <NavLink leftIcon={<Done />} to='/todo' primaryText='Todo' />
@@ -19,6 +43,7 @@ export default class Nav extends Component {
       </Menu>
     );
   }
+
 
 }
       // <nav className={this.props.classes}>
