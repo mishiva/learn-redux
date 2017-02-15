@@ -1,5 +1,5 @@
 {
-  "name": "learn-redux",
+  "name": "Redux Express Small App",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,7 @@
     "serve:prod": "NODE_ENV=production webpack && http-server build/",
     "build:progress": "NODE_ENV=production webpack --progress --profile --colors --display-error-details --display-cached --bail"
   },
-  "author": "",
+  "author": "Mikhail Demidov",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^6.3.5",
