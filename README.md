@@ -4,6 +4,7 @@
 * Webpack
 * Babel
 * Sass
+* Material UI
 * React
 * React Router
 * React Portal
