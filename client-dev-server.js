@@ -7,8 +7,6 @@ const logger = require('morgan');
 const proxy = require('http-proxy-middleware');
 var config = require('./server/config/config');
 
-var auth = require("./server/auth/auth")(); 
-
 var app = new (express)();
 var port = 3000;
 
